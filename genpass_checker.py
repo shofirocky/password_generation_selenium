@@ -68,4 +68,16 @@ status=toggle.get_attribute(data-status)
 if "active" not in status:   # depends on site’s CSS class
     toggle.click()
     print("clicked")
+
+"""
+"""
+toggle = driver.find_element(By.XPATH, "//button[@role='switch' and @aria-checked]")
+
+state = toggle.get_attribute("aria-checked")  # "true" or "false"
+
+if state == "false":   # If on
+    toggle.click()
+generate_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Generate')]")
+generate_button.click()
+time.sleep(2)
 """
