@@ -124,4 +124,77 @@ else:
 
 time.sleep(2)
 """
+#Print method (without assert)
+
+toggle1 = driver.find_element(By.XPATH, "(//button[@role='switch' and @aria-checked])[1]")
+toggle2 = driver.find_element(By.XPATH, "(//button[@role='switch' and @aria-checked])[2]")
+toggle3 = driver.find_element(By.XPATH, "(//button[@role='switch' and @aria-checked])[3]")
+
+state1 = toggle1.get_attribute("aria-checked")  # "true" or "false"
+state2 = toggle2.get_attribute("aria-checked")
+state3 = toggle3.get_attribute("aria-checked")
+
+if state1 == "true":   # If on
+    toggle1.click()
+if state2 == "true":
+    toggle2.click()
+if state3 == "false":
+    toggle3.click()
+
+generate_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Generate')]")
+generate_button.click()
+time.sleep(2)
+
+password = driver.find_element(By.XPATH, "//code[@class='font-mono text-xl text-white flex-1 overflow-x-auto']")
+has_upper = any(ch.isupper() for ch in password.text)
+has_lower = any(ch.islower() for ch in password.text)
+has_digit = any(ch.isdigit() for ch in password.text)
+if has_upper & has_lower & has_digit:
+    print("perfect:", password.text)
+elif has_upper & has_lower:
+    print("normal:", password.text)
+else:
+    print("low quality:", password.text)
+
+time.sleep(2)
+
+"""
+
+
+
+#With assert
+
+toggle1 = driver.find_element(By.XPATH, "(//button[@role='switch' and @aria-checked])[1]")
+toggle2 = driver.find_element(By.XPATH, "(//button[@role='switch' and @aria-checked])[2]")
+toggle3 = driver.find_element(By.XPATH, "(//button[@role='switch' and @aria-checked])[3]")
+
+state1 = toggle1.get_attribute("aria-checked")  # "true" or "false"
+state2 = toggle2.get_attribute("aria-checked")
+state3 = toggle3.get_attribute("aria-checked")
+
+if state1 == "true":   # If on
+    toggle1.click()
+if state2 == "true":
+    toggle2.click()
+if state3 == "false":
+    toggle3.click()
+
+generate_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Generate')]")
+generate_button.click()
+time.sleep(2)
+
+password = driver.find_element(By.XPATH, "//code[@class='font-mono text-xl text-white flex-1 overflow-x-auto']")
+has_upper = any(ch.isupper() for ch in password.text)
+has_lower = any(ch.islower() for ch in password.text)
+has_digit = any(ch.isdigit() for ch in password.text)
+if has_upper and has_lower and has_digit:
+    assert True, f"✅ Perfect password: {password.text}"
+elif has_upper and has_lower:
+    assert True, f"⚠️ Normal password (missing digit): {password.text}"
+else:
+    assert False, f"❌ Low quality password: {password.text}"
+
+time.sleep(2)
+
+
 
