@@ -1,5 +1,3 @@
-"""
-
 
 import time
 from selenium import webdriver
@@ -88,6 +86,7 @@ run_test_case(driver, "case2")
 
 print("\n🎉 All test cases executed successfully!")
 driver.quit()
+
 
 
 
